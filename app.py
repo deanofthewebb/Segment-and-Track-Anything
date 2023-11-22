@@ -97,9 +97,9 @@ def init_SegTracker(aot_model, long_term_mem, max_len_long_term, sam_gap, max_ob
     aot_args["long_term_mem_gap"] = long_term_mem
     aot_args["max_len_long_term"] = max_len_long_term
     # reset sam args
-    segtracker_args["sam_gap"] = sam_gap
-    segtracker_args["max_obj_num"] = max_obj_num
-    sam_args["generator_args"]["points_per_side"] = points_per_side
+    segtracker_args["sam_gap"] = 9999
+    segtracker_args["max_obj_num"] = 51
+    sam_args["generator_args"]["points_per_side"] = 84
     
     Seg_Tracker = SegTracker(segtracker_args, sam_args, aot_args)
     Seg_Tracker.restart_tracker()
@@ -118,9 +118,9 @@ def init_SegTracker_Stroke(aot_model, long_term_mem, max_len_long_term, sam_gap,
     aot_args["max_len_long_term"] = max_len_long_term
 
     # reset sam args
-    segtracker_args["sam_gap"] = sam_gap
-    segtracker_args["max_obj_num"] = max_obj_num
-    sam_args["generator_args"]["points_per_side"] = points_per_side
+    segtracker_args["sam_gap"] = 9999
+    segtracker_args["max_obj_num"] = 51
+    sam_args["generator_args"]["points_per_side"] = 84
     
     Seg_Tracker = SegTracker(segtracker_args, sam_args, aot_args)
     Seg_Tracker.restart_tracker()
@@ -269,9 +269,9 @@ def seg_track_app():
         Seg_Tracker = gr.State(None)
 
         aot_model = gr.State(None)
-        sam_gap = gr.State(None)
-        points_per_side = gr.State(None)
-        max_obj_num = gr.State(None)
+        sam_gap = gr.State(9999)
+        points_per_side = gr.State(84)
+        max_obj_num = gr.State(51)
 
         with gr.Row():
             # video input
