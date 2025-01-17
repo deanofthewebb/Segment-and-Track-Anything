@@ -1,7 +1,10 @@
 import torch
 import cv2
 import numpy as np
-from sam.segment_anything import sam_model_registry, SamPredictor, SamAutomaticMaskGenerator
+# from sam.segment_anything import sam_model_registry, SamPredictor, SamAutomaticMaskGenerator
+from sam2.build_sam import build_sam2
+from sam2.sam2_image_predictor import SAM2ImagePredictor
+from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
 
 class Segmentor:
     def __init__(self, sam_args):
@@ -12,9 +15,13 @@ class Segmentor:
             gpu_id: device
         """
         self.device = sam_args["gpu_id"]
-        self.sam = sam_model_registry[sam_args["model_type"]](checkpoint=sam_args["sam_checkpoint"])
+        checkpoint = "./ckpt/sam2.1_hiera_large.pt"
+        model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
+        predictor = 
+
+        self.sam = SAM2ImagePredictor(build_sam2(model_cfg, checkpoint))
         self.sam.to(device=self.device)
-        self.everything_generator = SamAutomaticMaskGenerator(model=self.sam, **sam_args['generator_args'])
+        self.everything_generator = SAM2AutomaticMaskGenerator(model=self.sam, **sam_args['generator_args'])
         self.interactive_predictor = self.everything_generator.predictor
         self.have_embedded = False
         
