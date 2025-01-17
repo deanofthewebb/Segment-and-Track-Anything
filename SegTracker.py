@@ -1,7 +1,9 @@
 import sys
 sys.path.append("..")
 sys.path.append("./sam")
-from sam.segment_anything import sam_model_registry, SamAutomaticMaskGenerator
+# from sam.segment_anything import sam_model_registry, SamAutomaticMaskGenerator
+from sam2.build_sam import build_sam2
+from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
 from aot_tracker import get_aot
 import numpy as np
 from tool.segmentor import Segmentor
